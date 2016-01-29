@@ -1,4 +1,4 @@
-#        #SpringMVCProject#
+#        #Spring MVC Web-application #
 20.01.2016 17.30 - First initial commit.
 Author - R1cro, Anatoly Teseyko.
 
@@ -11,4 +11,4 @@ System requirements:
 
 No further information is available at this time.
 
-Next commit: 28.01.2016
+Next commit: 30.01.2016

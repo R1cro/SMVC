@@ -12,10 +12,10 @@
     <title>Person List</title>
 </head>
 <body>
-<div>
-  <h1>Contact List</h1>
+<div align="center">
+  <h1>Person List</h1>
   <c:if test="${!empty persons}">
-    <table>
+    <table border="1">
       <tr>
         <th>Name</th>
         <th>Age</th>
