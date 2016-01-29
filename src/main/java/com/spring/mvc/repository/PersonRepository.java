@@ -31,8 +31,8 @@ public class PersonRepository {
       }
 
       public void removePerson(Integer id){
-          Person person = (Person) this.sessionFactory.getCurrentSession().load(
-                  Person.class, id);
+          Person person = (Person)
+                  this.sessionFactory.getCurrentSession().load(Person.class, id);
           if(null != person){
               this.sessionFactory.getCurrentSession().delete(person);
           }

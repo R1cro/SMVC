@@ -24,6 +24,9 @@
       <td>
         <form:input path="name"></form:input>
       </td>
+      <td>
+        <form:errors path="name"></form:errors>
+      </td>
     </tr>
     <tr>
       <td>
@@ -34,6 +37,9 @@
       <td>
         <form:input path="age"></form:input>
       </td>
+      <td>
+        <form:errors path="age"></form:errors>
+      </td>
     </tr>
     <tr>
       <td>
@@ -43,6 +49,9 @@
       </td>
       <td>
         <form:input path="nickname"></form:input>
+      </td>
+      <td>
+        <form:errors path="nickname"></form:errors>
       </td>
     </tr>
     <br>

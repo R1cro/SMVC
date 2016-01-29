@@ -20,12 +20,14 @@
         <th>Name</th>
         <th>Age</th>
         <th>Nickname</th>
+        <th>&nbsp;</th>
       </tr>
       <c:forEach items="${persons}" var="person">
         <tr>
           <td>${person.name}</td>
           <td>${person.age}</td>
           <td>${person.nickname}</td>
+          <td><a href="deletePerson/${person.id}">Delete</a></td>
         </tr>
       </c:forEach>
     </table>

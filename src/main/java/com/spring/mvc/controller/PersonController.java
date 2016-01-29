@@ -2,10 +2,13 @@ package com.spring.mvc.controller;
 
 import com.spring.mvc.domain.Person;
 import com.spring.mvc.repository.PersonRepository;
+import com.spring.mvc.validation.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,10 +21,12 @@ import java.util.List;
 public class PersonController
 {
     private PersonRepository personRepository;
+    private PersonValidator personValidator;
 
     @Autowired
-    public PersonController(PersonRepository personRepository){
+    public PersonController(PersonRepository personRepository, PersonValidator personValidator){
         this.personRepository = personRepository;
+        this.personValidator = personValidator;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -39,8 +44,20 @@ public class PersonController
     }
 
     @RequestMapping(value = "addPerson", method = RequestMethod.POST)
-    public String addPerson(@ModelAttribute("person") Person person) {
+    public String addPerson(@ModelAttribute("person") Person person, BindingResult bindingResult) {
+        this.personValidator.validate(person, bindingResult);
         this.personRepository.addPerson(person);
+
+        if(bindingResult.hasErrors()) {
+            return "addPerson";
+        }
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "deletePerson/{id}", method = RequestMethod.GET)
+    public String deletePerson(@PathVariable Integer id){
+        this.personRepository.removePerson(id);
 
         return "redirect:/";
     }
