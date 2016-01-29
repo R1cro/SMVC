@@ -5,6 +5,7 @@ import com.spring.mvc.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -14,21 +15,35 @@ import java.util.List;
  * Created by R1cro's Zenbook on 29.01.2016.
  */
 @Controller
-public class PersonController {
-
+public class PersonController
+{
     private PersonRepository personRepository;
-
 
     @Autowired
     public PersonController(PersonRepository personRepository){
         this.personRepository = personRepository;
     }
 
-     @RequestMapping(value = "/", method = RequestMethod.GET)
-     public String getPersons(Model model){
-         List<Person> persons = this.personRepository.listAll();
-         model.addAttribute("persons",persons);
-         return "index";
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String getPersons(Model model){
+        List<Person> persons = this.personRepository.listAll();
+        model.addAttribute("persons", persons);
+        return "index";
+    }
 
-     }
+    @RequestMapping(value = "addPerson", method = RequestMethod.GET)
+    public String addPerson(Model model) {
+        model.addAttribute("person", new Person());
+
+        return "addPerson";
+    }
+
+    @RequestMapping(value = "addPerson", method = RequestMethod.POST)
+    public String addPerson(@ModelAttribute("person") Person person) {
+        this.personRepository.addPerson(person);
+
+        return "redirect:/";
+    }
+
 }
+

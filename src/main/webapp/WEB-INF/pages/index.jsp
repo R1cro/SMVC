@@ -30,6 +30,9 @@
       </c:forEach>
     </table>
   </c:if>
+  <br>
+  <a href="addPerson">Add person to Database</a>
+  </br>
 </div>
 </body>
 </html>
