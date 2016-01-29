@@ -13,7 +13,7 @@
 </head>
 <body>
 <div align="center">
-  <h1>Person List</h1>
+  <h1>Persons List</h1>
   <c:if test="${!empty persons}">
     <table border="1">
       <tr>
