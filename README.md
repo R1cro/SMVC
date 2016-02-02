@@ -11,4 +11,3 @@ System requirements:
 
 No further information is available at this time.
 
-Next commit: 02.02.2016
