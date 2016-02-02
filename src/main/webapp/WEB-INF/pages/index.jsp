@@ -1,5 +1,6 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: R1cro's Zenbook
@@ -14,20 +15,26 @@
         <th>Name</th>
         <th>Age</th>
         <th>Nickname</th>
+        <sec:authorize access="hasRole('admin')">
         <th>&nbsp;</th>
+        </sec:authorize>
       </tr>
       <c:forEach items="${persons}" var="person">
         <tr>
           <td>${person.name}</td>
           <td>${person.age}</td>
           <td>${person.nickname}</td>
-         <td><a href="javascript:SMVC.deletePerson(${person.id})">Delete</a></td>
+          <sec:authorize access="hasRole('admin')">
+             <td><a href="javascript:SMVC.deletePerson(${person.id})">Delete</a></td>
+          </sec:authorize>
         </tr>
       </c:forEach>
     </table>
   </c:if>
-  <br>
-  <a href="addPerson">Add person to Database</a>
-  </br>
+  <sec:authorize access="isAuthenticated()">
+    <br>
+    <a href="addPerson">Add Person to Database</a>
+    </br>
+  </sec:authorize>
 </t:template>
 

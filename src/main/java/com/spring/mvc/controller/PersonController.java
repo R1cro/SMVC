@@ -4,6 +4,7 @@ import com.spring.mvc.domain.Person;
 import com.spring.mvc.repository.PersonRepository;
 import com.spring.mvc.validation.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,6 +38,7 @@ public class PersonController
     }
 
     @RequestMapping(value = "addPerson", method = RequestMethod.GET)
+    @PreAuthorize("isAuthenticated()")
     public String addPerson(Model model) {
         model.addAttribute("person", new Person());
 
@@ -44,6 +46,7 @@ public class PersonController
     }
 
     @RequestMapping(value = "addPerson", method = RequestMethod.POST)
+    @PreAuthorize("isAuthenticated()")
     public String addPerson(@ModelAttribute("person") Person person, BindingResult bindingResult) {
         this.personValidator.validate(person, bindingResult);
         this.personRepository.addPerson(person);
@@ -56,6 +59,7 @@ public class PersonController
     }
 
     @RequestMapping(value = "deletePerson/{id}", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('admin')")
     public String deletePerson(@PathVariable Integer id){
         this.personRepository.removePerson(id);
 
